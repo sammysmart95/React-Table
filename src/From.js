@@ -18,7 +18,7 @@ class User extends React.Component {
         this.state = {
             firstName: "",
             lastName: "",
-            birthDay: "",
+            birthday: "",
             age: "",
             hobby: "",
             allUsers: []
@@ -48,9 +48,9 @@ class User extends React.Component {
 
     submit(e) {
         e.preventDefault()
-        const { firstName, lastName, birthDay, age, hobby, allUsers } = this.state
+        const { firstName, lastName, birthday, age, hobby, allUsers } = this.state
         let nextAllUsers = allUsers
-        nextAllUsers.push({ firstName, lastName, birthDay, age, hobby })
+        nextAllUsers.push({ firstName, lastName, birthday, age, hobby })
         this.setState({ firstName: "", lastName: "", birthday: "", age: "", hobby: "", allUsers: nextAllUsers })
     }
 
@@ -58,7 +58,8 @@ class User extends React.Component {
     render() {
         const { allUsers } = this.state
         return (
-            <div className="form">
+            <div className='row'>
+            <div className="form col-md-6">
                 <Form onSubmit={this.submit}>
                     <Form.Group controlid="firstName">
                         <Form.Label>First Name</Form.Label>
@@ -90,9 +91,14 @@ class User extends React.Component {
                     </Button>
                 </Form>
                 <br />
-                <Table_Update allUsers = {allUsers} />
             </div >
-        );
+            <div className="col-md-6">
+                <Table_Update allUsers = {allUsers} />
+
+            </div>
+            
+            </div>
+            );
     }
 }
 

@@ -6,6 +6,7 @@ import User from './From.js';
 function App() {
   return (
     <div className="App">
+      
       <User className="user"/>
     </div>
   );

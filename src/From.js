@@ -21,6 +21,7 @@ class User extends React.Component {
             birthDay: "",
             age: "",
             hobby: "",
+            allUsers: []
         }
     }
 
@@ -47,29 +48,15 @@ class User extends React.Component {
 
     submit(e) {
         e.preventDefault()
-
-
-        // const studentObject = {
-        //     firstName: this.state.firstName,
-        //     lastName: this.state.lastName,
-        //     birthDay: this.state.birthday,
-        //     age: this.state.age,
-        //     hobby: this.state.hobby,
-        // }
-
-        console.log(`List of Student created`);
-        console.log(`First Name: ${this.state.firstName}`);
-        console.log(`Last Name: ${this.state.lastName}`);
-        console.log(`Birthday: ${this.state.birthday}`);
-        console.log(`Age: ${this.state.age}`);
-        console.log(`Hooby: ${this.state.hobby}`);
-
-
-        this.setState({ firstName: "", lastName: "", birthday: "", age: "", hobby: "" })
+        const { firstName, lastName, birthDay, age, hobby, allUsers } = this.state
+        let nextAllUsers = allUsers
+        nextAllUsers.push({ firstName, lastName, birthDay, age, hobby })
+        this.setState({ firstName: "", lastName: "", birthday: "", age: "", hobby: "", allUsers: nextAllUsers })
     }
 
 
     render() {
+        const { allUsers } = this.state
         return (
             <div className="form">
                 <Form onSubmit={this.submit}>
@@ -103,7 +90,7 @@ class User extends React.Component {
                     </Button>
                 </Form>
                 <br />
-               <Table_Update />
+                <Table_Update allUsers = {allUsers} />
             </div >
         );
     }

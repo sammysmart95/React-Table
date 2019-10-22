@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <Card body>
-        <Card.Title className="React">
-          <h1>React Auto Update Table</h1>
+        <Card.Title className="heading">
+          <h1>React Table Update</h1>
         </Card.Title>
         <br />
 

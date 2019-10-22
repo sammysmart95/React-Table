@@ -64,6 +64,10 @@ class User extends React.Component {
         this.setState({ id: '', firstName: "", lastName: "", birthday: "", age: "", hobby: "", allUsers: nextAllUsers })
     }
 
+    clearForm = () => {
+        this.setState({ id: '', firstName: "", lastName: "", birthday: "", age: "", hobby: "" })
+    }
+
     deleteUser = user => {
         this.setState({
             ...this.state,
@@ -109,10 +113,14 @@ class User extends React.Component {
                             <Form.Label>Hobby</Form.Label>
                             <Form.Control type="text" value={this.state.hobby} onChange={this.changeHobby} />
                         </Form.Group>
-
-                        <Button variant="success" size="lg" block="block" type="submit">
-                            Submit
-                    </Button>
+                        <Button variant="success" type="submit">
+                            {this.state.id ? "Edit" : "Submit"}
+                        </Button>
+                        <Button variant="secondary" onClick={this.clearForm} className="pull-right" style={{
+                            float: 'right'
+                        }} >
+                            Clear
+                        </Button>
                     </Form>
                     <br />
                 </div >

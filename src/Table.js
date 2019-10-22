@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 
-const Table_Update = ({ allUsers }) => <div>
+const Table_Update = ({ allUsers, editUser, deleteUser }) => <div>
     {allUsers.length ? <Table striped bordered hover>
         <thead>
             <tr>
@@ -11,7 +11,7 @@ const Table_Update = ({ allUsers }) => <div>
                 <th>Birthday</th>
                 <th>Age</th>
                 <th>Hobby</th>
-                <th></th>
+                <th colSpan='2' >Manage</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,8 @@ const Table_Update = ({ allUsers }) => <div>
                 <td>{user.birthday}</td>
                 <td>{user.age}</td>
                 <td>{user.hobby}</td>
-                <td></td>
+                <td onClick={() => editUser(user)} >Edit</td>
+                <td onClick={() => deleteUser(user)} >Delete</td>
             </tr>
             )}
         </tbody>

@@ -6,3 +6,11 @@ export const addUser = userData => dispatch => {
         payload: userData
     })
 }
+
+export const deleteUser = index => dispatch => {
+    return dispatch({
+        type: CONSTANTS.DELETE_USER,
+        payload: index
+    })
+}
+

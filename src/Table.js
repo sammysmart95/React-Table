@@ -24,7 +24,7 @@ const TableUpdate = ({ allUsers, editUser, deleteUser }) => <div>
                 <td>{user.age}</td>
                 <td>{user.hobby}</td>
                 <td onClick={() => editUser(user)} >Edit</td>
-                <td onClick={() => deleteUser(user)} >Delete</td>
+                <td onClick={() => deleteUser(i)} >Delete</td>
             </tr>
             )}
         </tbody>

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import Table from './Table.js';
 
-import { addUser } from './action/usersAction'
+import { addUser, deleteUser } from './action/usersAction'
 
 
-const User = ({ users, addUser }) => {
+const User = ({ users, addUser, deleteUser }) => {
 
     const [formState, setFormState] = useState({
         id: '',
@@ -28,17 +28,17 @@ const User = ({ users, addUser }) => {
 
     const submit = e => {
         e.preventDefault()
-        // if (id) {
-        //     formState = formState.map(users => {
-        //         if (users.id === id) {
-        //             return { ...users, formState }
-        //         }
-        //         return users
-        //     })
-        // } else {
-        //     addUser.push({ id: Math.random(), formState })
-        // }
-        addUser(formState)
+        if(formState.id){
+            users = users.map(users => {
+                if(formState.id === users.id){
+                    return {...users, formState}
+                }
+                return users
+            })
+        }else{
+            addUser({...formState, id: Math.random() * 5000})
+        }
+
         clearForm()
     }
 
@@ -53,29 +53,15 @@ const User = ({ users, addUser }) => {
         })
     }
 
-    const clear = e => {
+    const editUser = user => {
         setFormState({
-            id: '',
-            firstName: "",
-            lastName: "",
-            birthday: "",
-            age: "",
-            hobby: "",
+            ...formState,
+            ...user
         })
     }
 
-    const edit = users => {
-        setFormState({
-            ...formState,
-            ...users
-        })
-    }
-
-    const delet = users => {
-        setFormState({
-            ...formState,
-            users: users.filter(use => use.id !== users.id)
-        })
+    const removeUser = index => {
+        deleteUser(index)
     }
 
     return <div className='row'>
@@ -108,7 +94,7 @@ const User = ({ users, addUser }) => {
                 <Button variant="success" type="submit">
                     {formState.id ? "Edit" : "Submit"}
                 </Button>
-                <Button variant="secondary" onClick={clear} className="pull-right" style={{
+                <Button variant="secondary" onClick={clearForm} className="pull-right" style={{
                     float: 'right'
                 }} >
                     Clear
@@ -117,7 +103,7 @@ const User = ({ users, addUser }) => {
             <br />
         </div >
         <div className="col-md-6">
-            <Table allUsers={users} editUser={edit} deleteUser={delet} />
+            <Table allUsers={users} editUser={editUser} deleteUser={removeUser} />
         </div>
     </div>
 };
@@ -130,7 +116,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addUser: (userData) => dispatch(addUser(userData))
+    addUser: (userData) => dispatch(addUser(userData)),
+    deleteUser: index => dispatch(deleteUser(index))
 })
 
 

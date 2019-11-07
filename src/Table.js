@@ -1,7 +1,8 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 
-const Table_Update = ({ allUsers, editUser, deleteUser }) => <div>
+
+const TableUpdate = ({ allUsers, editUser, deleteUser }) => <div>
     {allUsers.length ? <Table striped bordered hover>
         <thead>
             <tr>
@@ -31,4 +32,4 @@ const Table_Update = ({ allUsers, editUser, deleteUser }) => <div>
         : <h4 className='text-center' >No user added</h4>}
 </div>
 
-export default Table_Update;
+export default TableUpdate;

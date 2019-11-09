@@ -8,12 +8,18 @@ export default (state = initialState, action) => {
             return [...state, action.payload]
         case CONSTANTS.DELETE_USER:
             return state.filter((user, index) => index !== action.payload)
+        case CONSTANTS.EDIT_USER:
+            return state.map((user) => {
+                if (user.id === action.payload.id) {
+                    return action.payload
+                }
+                return user
+                
+            })
         default:
         return state
     }
 }
-
-
 
 
 

@@ -14,3 +14,10 @@ export const deleteUser = index => dispatch => {
     })
 }
 
+export const editUser = index => dispatch => {
+    return dispatch({
+        type: CONSTANTS.EDIT_USER,
+        payload: index
+    })
+}
+

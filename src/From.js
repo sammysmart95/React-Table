@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import Table from './Table.js';
 
-import { addUser, deleteUser } from './action/usersAction'
+import { addUser, deleteUser, editUser } from './action/usersAction'
 
 
-const User = ({ users, addUser, deleteUser }) => {
+const User = ({ users, addUser, deleteUser, editUser }) => {
 
     const [formState, setFormState] = useState({
         id: '',
@@ -28,17 +28,11 @@ const User = ({ users, addUser, deleteUser }) => {
 
     const submit = e => {
         e.preventDefault()
-        if(formState.id){
-            users = users.map(users => {
-                if(formState.id === users.id){
-                    return {...users, formState}
-                }
-                return users
-            })
-        }else{
+            if(formState.id){
+               editUser(formState)
+            }else{
             addUser({...formState, id: Math.random() * 5000})
-        }
-
+            }
         clearForm()
     }
 
@@ -53,7 +47,7 @@ const User = ({ users, addUser, deleteUser }) => {
         })
     }
 
-    const editUser = user => {
+    const edit = user => {
         setFormState({
             ...formState,
             ...user
@@ -103,7 +97,7 @@ const User = ({ users, addUser, deleteUser }) => {
             <br />
         </div >
         <div className="col-md-6">
-            <Table allUsers={users} editUser={editUser} deleteUser={removeUser} />
+            <Table allUsers={users} editUser={edit} deleteUser={removeUser} />
         </div>
     </div>
 };
@@ -117,7 +111,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     addUser: (userData) => dispatch(addUser(userData)),
-    deleteUser: index => dispatch(deleteUser(index))
+    deleteUser: index => dispatch(deleteUser(index)),
+    editUser: user => dispatch(editUser(user))
 })
 
 
